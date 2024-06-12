@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import ExpenseList from './components/expenses/ExpenseList';
+import Greet from './components/Greet';
 
-function App() {
+const App = () => {
+
+  // 서버에서 지출항목 JSON 배열을 응답받음
+  const expenses = [
+    {
+      title: '치킨먹음',
+      price: 30000,
+      date: new Date(2024, 6 - 1, 3)
+    },
+    {
+      title: '족발먹음',
+      price: 40000,
+      date: new Date(2024, 6 - 1, 7)
+    },
+    {
+      title: '헬스장등록',
+      price: 300000,
+      date: new Date(2024, 6 - 1, 12)
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ExpenseList expenses={expenses} />
+    </>
   );
-}
+};
 
 export default App;
