@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import ExpenseList from './components/expenses/ExpenseList';
-import Greet from './components/Greet';
+import NewExpense from './components/new-expense/NewExpense';
+
 
 const App = () => {
 
@@ -15,17 +16,36 @@ const App = () => {
     {
       title: '족발먹음',
       price: 40000,
-      date: new Date(2024, 6 - 1, 7)
+      date: new Date(2023, 12 - 1, 7)
     },
     {
       title: '헬스장등록',
       price: 300000,
       date: new Date(2024, 6 - 1, 12)
     },
+    {
+      title: '파파존스',
+      price: 40000,
+      date: new Date(2022, 3 - 1, 12)
+    },
+    {
+      title: '파리채',
+      price: 1000,
+      date: new Date(2023, 5 - 1, 12)
+    },
   ];
+
+
+  const onAddExpense = (userInput) => {
+    console.log('App.js 가 내려보낸 함수 호출');
+    // console.log(userInput);
+    expenses.push(userInput);
+    console.log(expenses);
+  };
 
   return (
     <>
+      <NewExpense onSave={onAddExpense} />
       <ExpenseList expenses={expenses} />
     </>
   );
