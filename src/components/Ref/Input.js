@@ -1,7 +1,13 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+import styles from './Input.module.scss';
 
-const Input = forwardRef(({type}, ref) => {
-  return <input ref={ref} type={type} />;
-});
+const Input = ({ label, inputAttr }) => {
+  return (
+    <div className={styles.input}>
+      <label>{label}</label>
+      <input {...inputAttr} />
+    </div>
+  );
+};
 
 export default Input;
