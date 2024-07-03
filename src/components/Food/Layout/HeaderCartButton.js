@@ -5,7 +5,6 @@ import CartContext from '../../../store/cart-context';
 
 const HeaderCartButton = ({ onShow }) => {
 
-
   // bump 애니메이션을 제어하는 상태변수
   const [isBump, setIsBump] = useState(false);
 

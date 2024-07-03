@@ -1,27 +1,42 @@
-import React, { useState } from 'react';
-import Header from './components/Food/Layout/Header';
-import Meals from './components/Food/Meals/Meals';
-import Cart from './components/Food/Cart/Cart';
-import CartProvider from './store/CartProvider';
+import React from 'react';
+import Home from './components/RouteExample/pages/Home';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import RootLayout from './components/RouteExample/layout/RootLayout';
+import ErrorPage from './components/RouteExample/pages/ErrorPage';
+import Events, { loader } from './components/RouteExample/pages/Events';
+import EventDetail from './components/RouteExample/pages/EventDetail';
+import EventLayout from './components/RouteExample/layout/EventLayout';
+import NewEvent from './components/RouteExample/pages/NewEvent';
+
+// 라우터 설정
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: 'events',
+        element: <EventLayout />,
+        children: [
+          {
+            index: true,
+            element: <Events />,
+            loader: loader,
+          },
+          { path: ':eventId', element: <EventDetail /> },
+          { path: 'new', element: <NewEvent /> }
+        ]
+      },
+    ]
+  },
+]);
 
 const App = () => {
-  // 장바구니 모달을 열고 닫는 상태변수
-  const [cartIsShown, setCartIsShown] = useState(false);
-
-  // 모달을 열어주는 핸들러
-  const showCartHandler = () => setCartIsShown(true);
-
-  // 모달을 닫아주는 핸들러
-  const hideCartHandler = () => setCartIsShown(false);
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <div id="main">
-        <Meals />
-      </div>
-    </CartProvider>
+    <RouterProvider router={router} />
   );
 };
 
